@@ -3,2027 +3,1199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venturing Abroad: Our First International Subsidiary | CaspianTech Global</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>CaspianTech Global - IHRM Strategy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
-        :root {
-            --bg-color: #0a0a0f;
-            --text-color: #f8f9fa;
-            --primary-color: #667eea;
-            --secondary-color: #adb5bd;
-            --card-bg: rgba(20, 20, 30, 0.8);
-            --border-color: rgba(102, 126, 234, 0.2);
-            --shadow: 0 20px 60px rgba(0,0,0,0.3);
-            --gradient-start: #667eea;
-            --gradient-end: #764ba2;
-            --accent-color: #f093fb;
-            --success-color: #4ade80;
-            --danger-color: #f87171;
-        }
-        
-        body.light-mode {
-            --bg-color: #f4f7f9;
-            --text-color: #212529;
-            --primary-color: #667eea;
-            --secondary-color: #6c757d;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --border-color: rgba(102, 126, 234, 0.2);
-            --shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        html, body {
-            height: 100%;
-            overflow: hidden !important;
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-color);
-            color: var(--text-color);
+        :root {
+            --primary: #00F5D4;
+            --secondary: #00BBF9;
+            --accent: #FE5F55;
+            --dark: #0A0E27;
+            --light: #F8FAFC;
+            --gray: #94A3B8;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
         }
         
         #particles-js {
             position: fixed;
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            background-color: transparent;
-            pointer-events: none;
+            z-index: 0;
         }
         
-        .gradient-bg {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            opacity: 0.05;
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100vw;
+            height: 100vh;
         }
         
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 1000;
-            padding: 0.8rem 2%;
-            background: rgba(10, 10, 15, 0.95);
+            padding: 0.6rem 2.5%;
+            background: rgba(10, 14, 39, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid rgba(0, 245, 212, 0.15);
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
+            height: 50px;
         }
         
-        body.light-mode header { background: rgba(255, 255, 255, 0.95); }
-        
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1.3rem;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-        
-        nav {
-            display: flex;
-            gap: 0.3rem;
-            flex-wrap: nowrap;
-            max-width: 60%;
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-        
-        nav::-webkit-scrollbar { display: none; }
-        
-        .nav-link {
-            text-decoration: none;
-            color: var(--secondary-color);
-            font-weight: 600;
-            font-size: 0.75rem;
-            padding: 0.5rem 0.8rem;
-            border-radius: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        
-        .nav-link:hover::before, .nav-link.active::before { opacity: 0.15; }
-        .nav-link:hover, .nav-link.active {
-            color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-        
-        .controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 45px;
-            height: 24px;
-        }
-        
-        .switch input { opacity: 0; width: 0; height: 0; }
-        
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            transition: .4s;
-            border-radius: 34px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .slider:before { transform: translateX(21px); }
-
-        main {
-            padding-top: 70px;
-            min-height: 100vh;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .slide {
-            position: absolute;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 90px);
-            padding: 2rem 3%;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-        
-        .slide::-webkit-scrollbar { width: 8px; }
-        .slide::-webkit-scrollbar-track {
-            background: rgba(102, 126, 234, 0.1);
-            border-radius: 10px;
-        }
-        .slide::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            border-radius: 10px;
-        }
-        
-        .slide.active { opacity: 1; visibility: visible; }
-        
-        .slide-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-align: center;
-        }
-        
-        h2 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        
-        h3 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-color);
+        .brand {
             display: flex;
             align-items: center;
             gap: 0.6rem;
         }
         
-        p, li {
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 0.8rem;
-            color: var(--text-color);
-        }
-        
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.8rem;
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 70px rgba(102, 126, 234, 0.3);
-        }
-        
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .icon-text {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .icon-wrapper {
-            min-width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-        
-        ul { list-style: none; padding-left: 0; }
-        ul li {
-            padding-left: 2rem;
-            position: relative;
-            margin-bottom: 0.6rem;
-        }
-        ul li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 500px;
-            margin: 2rem 0;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        th {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: white;
-            font-weight: 600;
-        }
-        
-        tr:hover { background: rgba(102, 126, 234, 0.1); }
-        
-        .progress-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(102, 126, 234, 0.1);
-            z-index: 1000;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-            transition: width 0.3s ease;
-            width: 0;
-        }
-        
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-        
-        .loading.hide { opacity: 0; pointer-events: none; }
-        
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 4px solid var(--border-color);
-            border-top-color: var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
-            border-left: 4px solid var(--primary-color);
-            padding: 1.2rem;
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .process-flow {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .process-step {
-            flex: 1;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .process-step:not(:last-child)::after {
-            content: "→";
-            position: absolute;
-            right: -1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin: 0 auto 1rem;
+            font-size: 1.1rem;
         }
-
-        .title-slide {
+        
+        .brand-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .export-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            padding: 0.5rem 1.3rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s;
+            padding: 58px 2.5% 50px 2.5%;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .slide-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+        
+        .slide-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.3rem;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .hero .team {
+            background: rgba(0, 245, 212, 0.08);
+            border: 2px solid rgba(0, 245, 212, 0.25);
+            border-radius: 12px;
+            padding: 1rem 2.3rem;
+            font-size: 0.9rem;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            grid-template-rows: 47% 47%;
+            gap: 1rem;
+            height: calc(100vh - 165px);
+            width: 100%;
+        }
+        
+        .block-1 { grid-column: 1; grid-row: 1; }
+        .block-2 { grid-column: 2; grid-row: 1; }
+        .block-3 { grid-column: 1 / span 1; grid-row: 2; width: 150%; }
+        .block-4 { grid-column: 2 / span 1; grid-row: 2; width: 66.67%; justify-self: end; }
+        
+        .content-block {
+            background: linear-gradient(135deg, rgba(0, 245, 212, 0.06), rgba(0, 187, 249, 0.06));
+            border: 2px solid rgba(0, 245, 212, 0.2);
+            border-radius: 14px;
+            padding: 1.2rem 1.2rem 1.4rem 1.2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+        
+        .content-block:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            box-shadow: 0 8px 30px rgba(0, 245, 212, 0.25);
+        }
+        
+        .block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .block-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        
+        .block-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .block-content {
+            flex: 1;
+            color: var(--gray);
+            line-height: 1.55;
+            font-size: 0.82rem;
+        }
+        
+        .block-content p {
+            margin-bottom: 0.65rem;
+        }
+        
+        .block-content strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .highlight-block {
+            background: linear-gradient(135deg, rgba(254, 95, 85, 0.12), rgba(254, 95, 85, 0.06));
+            border-color: rgba(254, 95, 85, 0.35);
+        }
+        
+        .highlight-block .block-title {
+            background: linear-gradient(135deg, var(--accent), #ff8a80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .chart-slide {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            height: calc(100vh - 90px);
         }
-
-        .title-slide h1 { font-size: 3.5rem; margin-bottom: 1rem; }
-        .title-slide .subtitle {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 2rem;
-        }
-
-        .team-info {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+        
+        .chart-wrapper {
+            width: 85%;
+            height: calc(100vh - 170px);
+            background: rgba(0, 245, 212, 0.05);
+            border: 2px solid rgba(0, 245, 212, 0.2);
             border-radius: 16px;
             padding: 2rem;
-            margin-top: 2rem;
-            max-width: 800px;
+            margin-top: 1rem;
         }
-
-        .team-info h3 { color: var(--primary-color); margin-bottom: 1rem; }
-
-        .comparison-table {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin: 2rem 0;
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 0.6rem 2.5%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(0, 245, 212, 0.15);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 44px;
         }
-
-        .comparison-column {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
+        
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            border: none;
+            padding: 0.5rem 1.3rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.3s;
         }
-
-        .comparison-column h3 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--border-color);
+        
+        .progress {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 0 1.3rem;
         }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            transition: width 0.5s;
+            width: 0%;
         }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
+        
+        .video-link {
+            position: fixed;
+            bottom: 58px;
+            right: 2.5%;
+            background: linear-gradient(135deg, #FF0000, #CC0000);
+            color: white;
+            padding: 0.7rem 1.1rem;
+            border-radius: 32px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 0.75rem;
+            z-index: 101;
+            animation: bounce 2s ease-in-out infinite;
         }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label { font-size: 0.9rem; color: var(--secondary-color); }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .process-flow { flex-direction: column; }
-            .process-step:not(:last-child)::after {
-                content: "↓";
-                right: 50%;
-                top: auto;
-                bottom: -1.5rem;
-                transform: translateX(50%);
-            }
-            nav { max-width: 50%; }
-            .nav-link { font-size: 0.65rem; padding: 0.4rem 0.6rem; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .title-slide h1 { font-size: 2.5rem; }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
     </style>
 </head>
-<body class="dark-mode">
-    <div class="loading">
-        <div class="loader"></div>
-    </div>
-    
+<body>
     <div id="particles-js"></div>
-    <div class="gradient-bg"></div>
     
-    <header>
-        <div class="logo">
-            <div class="logo-icon">🌍</div>
-            CaspianTech Global
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="brand-icon">🌍</div>
+                <div class="brand-text">CaspianTech Global</div>
+            </div>
+            <button class="export-btn" onclick="exportToPDF()">
+                <ion-icon name="download-outline"></ion-icon>
+                Export PDF
+            </button>
+        </header>
+        
+        <!-- Slide 0: Hero -->
+        <div class="slide active hero">
+            <h1>Venturing Abroad:<br/>Our First International Subsidiary</h1>
+            <p class="subtitle">A Comprehensive International Human Resource Management Strategy</p>
+            <div class="team">
+                <strong>Team A:</strong> Iram Iqbal, Lala Eyvazova, Elnura Alakbarova, Aytan Rzayeva, Javanshir Hamidzada, Nizami Tahirov
+            </div>
         </div>
-        <nav>
-            <a href="#" class="nav-link">Introduction</a>
-            <a href="#" class="nav-link">Saudi Arabia</a>
-            <a href="#" class="nav-link">Legal Framework</a>
-            <a href="#" class="nav-link">Education & Infrastructure</a>
-            <a href="#" class="nav-link">Cultural Analysis</a>
-            <a href="#" class="nav-link">Hofstede Dimensions</a>
-            <a href="#" class="nav-link">Hofstede Chart</a>
-            <a href="#" class="nav-link">Workforce Planning</a>
-            <a href="#" class="nav-link">Staffing Approach</a>
-            <a href="#" class="nav-link">Recruitment</a>
-            <a href="#" class="nav-link">Selection</a>
-            <a href="#" class="nav-link">Admin Requirements</a>
-            <a href="#" class="nav-link">Training Design</a>
-            <a href="#" class="nav-link">Expat Training</a>
-            <a href="#" class="nav-link">HCN Training</a>
-            <a href="#" class="nav-link">Performance Mgmt</a>
-            <a href="#" class="nav-link">Special Considerations</a>
-            <a href="#" class="nav-link">Compensation</a>
-            <a href="#" class="nav-link">HCN Compensation</a>
-            <a href="#" class="nav-link">Conclusion</a>
-        </nav>
-        <div class="controls">
-            <label class="switch">
-                <input type="checkbox" id="theme-toggle">
-                <span class="slider"></span>
-            </label>
+        
+        <!-- Slide 1: Company Introduction -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Company Introduction</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1">
+                    <div class="block-header">
+                        <div class="block-icon">🚀</div>
+                        <div class="block-title">CaspianTech Global</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Leading Azerbaijani technology firm specializing in innovative software solutions. We develop advanced analytics platforms, AI-driven optimization solutions, and robust cybersecurity systems for major companies across the Caspian region.</p>
+                        <p>Our commitment to excellence and innovation has driven domestic success and positions us for strategic international expansion.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">💡</div>
+                        <div class="block-title">Our Core Values</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Innovation-driven mindset with continuous improvement. Customer-centric approach ensuring solution value delivery. Technical excellence maintaining highest quality standards.</p>
+                        <p>Collaborative team culture fostering creativity. Ethical business practices built on integrity. Deep commitment to employee development and career growth.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-3 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">📍</div>
+                        <div class="block-title">Riyadh, Saudi Arabia</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Growing Tech Hub:</strong> Riyadh is rapidly emerging as a major technology hub in the Middle East, attracting significant investment in innovation and digital transformation under Vision 2030.</p>
+                        <p><strong>Economic Power:</strong> Saudi Arabia has a GDP exceeding $1 trillion, making it the largest economy in the Middle East with substantial purchasing power.</p>
+                        <p><strong>Market Size:</strong> Over 36 million people with high digital adoption rates and young demographics.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-4">
+                    <div class="block-header">
+                        <div class="block-icon">🎯</div>
+                        <div class="block-title">Strategic Opportunity</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Massive digital transformation projects across government and private sectors. Growing demand for cybersecurity solutions. Rising adoption of AI and analytics in business operations.</p>
+                        <p>Smart city initiatives requiring advanced technology platforms. Gateway to broader GCC and MENA region expansion.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
-    
-    <main>
-        <!-- Slide 1: Title -->
-        <section class="slide active">
-            <div class="slide-content title-slide">
-                <h1>🌍 Venturing Abroad</h1>
-                <p class="subtitle">Our First International Subsidiary</p>
-                <div class="team-info">
-                    <h3>HR Task Force Team</h3>
-                    <p><strong>Team A:</strong> Iram Iqbal, Lala Eyvazova, Elnura Alakbarova, Aytan Rzayeva, Javanshir Hamidzada, Nizami Tahirov</p>
-                    <div class="highlight-box" style="margin-top: 1.5rem;">
-                        <p><strong>Mission:</strong> As a specially appointed taskforce of top HR professionals, we present a comprehensive International Human Resource Management (IHRM) strategy for establishing our company's first foreign subsidiary. This strategic roadmap is designed to navigate the complexities of international expansion.</p>
+        
+        <!-- Slide 2: Host Country Institutional Environment -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Host Country: Institutional Environment</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1">
+                    <div class="block-header">
+                        <div class="block-icon">🌍</div>
+                        <div class="block-title">Strategic Regional Gateway</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Saudi Arabia serves as the gateway to the Gulf Cooperation Council (GCC) and wider Middle East and North Africa (MENA) region, providing access to markets collectively worth over $2 trillion.</p>
+                        <p>Excellent connectivity to major international markets through modern ports and airports. Strategic geographic position bridging three continents and facilitating global trade.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Slide 2: Company Introduction -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Company's Introduction</h1>
                 
-                <div class="card">
-                    <div class="icon-text">
-                        <div class="icon-wrapper">💼</div>
-                        <div>
-                            <h2>CaspianTech Global</h2>
-                            <p>A leading Azerbaijani technology firm that specializes in innovative software solutions.</p>
-                        </div>
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">💰</div>
+                        <div class="block-title">Tax & Financial Incentives</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Tax Benefits:</strong> Corporate tax rate of 20%, competitive compared to developed markets. Tax exemptions available in special economic zones. No personal income tax for employees.</p>
+                        <p><strong>Government Support:</strong> Grants and subsidies available for technology and innovation sectors. Investment incentives and funding opportunities for foreign businesses. Access to government contracts and tenders.</p>
                     </div>
                 </div>
-
-                <div class="grid-3">
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🔬</div>
-                        <h3>Advanced Analytics</h3>
-                        <p>Cutting-edge data analysis and business intelligence solutions that drive informed decision-making.</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🤖</div>
-                        <h3>AI-Driven Optimization</h3>
-                        <p>Artificial intelligence solutions that optimize business processes and enhance operational efficiency.</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🔒</div>
-                        <h3>Robust Cybersecurity</h3>
-                        <p>Enterprise-grade security platforms protecting major companies across the Caspian region.</p>
-                    </div>
-                </div>
-
-                <div class="highlight-box">
-                    <h3>Our Commitment</h3>
-                    <p>Our commitment to excellence and a strong culture of innovation have fueled our domestic success, positioning us for strategic international growth.</p>
-                </div>
-
-                <div class="card">
-                    <h2>🎯 Strategic Location: Riyadh, Saudi Arabia</h2>
-                    <p style="font-size: 1.1rem; margin-top: 1rem;">We are establishing our first international subsidiary in Riyadh, the capital of Saudi Arabia, a rapidly emerging technology hub in the Middle East.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide 3: Saudi Arabia - Institutional Environment -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Host-Country: Saudi Arabia</h1>
-                <h2>📊 Institutional Environment</h2>
                 
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value">$1T+</div>
-                        <div class="stat-label">GDP Size</div>
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">🎓</div>
+                        <div class="block-title">Educational Infrastructure & Talent Pool</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value">36M+</div>
-                        <div class="stat-label">Population</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">$2T</div>
-                        <div class="stat-label">Regional Market Access</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">20%</div>
-                        <div class="stat-label">Corporate Tax Rate</div>
+                    <div class="block-content">
+                        <p>Heavy government investment in education infrastructure and quality improvement. Major universities including King Saud University and KAUST producing thousands of graduates annually.</p>
+                        <p>Growing emphasis on STEM education aligned with Vision 2030 objectives. Developing local tech talent pool with increasing technical capabilities. Government scholarships and training programs supporting workforce development.</p>
                     </div>
                 </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">🚀</div>
-                            <div>
-                                <h3>Growing Tech Hub</h3>
-                                <p>Riyadh is rapidly emerging as a technology hub, attracting innovation and talent from around the world.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">💰</div>
-                            <div>
-                                <h3>Thriving Market Access</h3>
-                                <p>Saudi Arabia has a GDP exceeding $1 trillion and is the largest economy in the Middle East with strong purchasing power and a rapidly growing population of over 36 million people.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="icon-text">
-                        <div class="icon-wrapper">🎯</div>
-                        <div>
-                            <h3>Vision 2030 Government Support</h3>
-                            <p>Favorable regulatory framework and strong government incentives for foreign investment under Vision 2030, Saudi Arabia's strategic framework to reduce dependence on oil and diversify the economy.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">🌍</div>
-                            <div>
-                                <h3>Strategic Regional Location</h3>
-                                <p>Saudi Arabia serves as a gateway to the Gulf Cooperation Council (GCC) and the wider MENA region. The Kingdom offers access to regional markets worth over $2 trillion.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">💵</div>
-                            <div>
-                                <h3>Tax & Financial Incentives</h3>
-                                <p>The Kingdom has low corporate tax rates (20%) and offers tax exemptions in certain industries. Foreign businesses benefit from government grants, subsidies, and investment incentives.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Slide 4: Legal & Regulatory Framework -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Host-Country: Saudi Arabia</h1>
-                <h2>⚖️ Legal & Regulatory Framework</h2>
                 
-                <div class="highlight-box">
-                    <p><strong>Saudi labor laws are evolving to support a modern workforce, including specific Saudization requirements to promote national employment. Businesses must also navigate considerations related to Islamic laws.</strong></p>
-                </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">⏰</div>
-                            <div>
-                                <h3>Working Hours</h3>
-                                <ul>
-                                    <li><strong>Standard Hours:</strong> 8 hours/day, 48 hours/week</li>
-                                    <li><strong>Ramadan (Muslims):</strong> Reduced to 6 hours/day (36 hours/week)</li>
-                                </ul>
-                            </div>
-                        </div>
+                <div class="content-block block-4 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">🏗️</div>
+                        <div class="block-title">Infrastructure Excellence</div>
                     </div>
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">🏖️</div>
-                            <div>
-                                <h3>Paid Leave</h3>
-                                <ul>
-                                    <li><strong>Annual Leave:</strong> As per contract</li>
-                                    <li><strong>Sick Leave:</strong> Structured pay reduction</li>
-                                    <li><strong>Maternity:</strong> 12 weeks</li>
-                                    <li><strong>Paternity:</strong> 3 days</li>
-                                    <li><strong>Marriage:</strong> 5 days</li>
-                                    <li><strong>Hajj:</strong> 10 days (with conditions)</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="icon-text">
-                        <div class="icon-wrapper">📋</div>
-                        <div>
-                            <h3>Employment Contracts</h3>
-                            <p>Understand contract types, notice periods, and termination rules to ensure compliance with Saudi labor law.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="icon-text">
-                        <div class="icon-wrapper">💰</div>
-                        <div>
-                            <h3>End-of-Service Benefits (EOSB)</h3>
-                            <p>Mandatory gratuity payments based on tenure. Employers must provide end-of-service benefits calculated according to the length of service.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="icon-text">
-                        <div class="icon-wrapper">🇸🇦</div>
-                        <div>
-                            <h3>Saudization (Nitaqat) Program</h3>
-                            <p>You must hire a certain percentage of Saudi nationals, varying by sector and company size. Compliance can offer benefits, while non-compliance restricts services.</p>
-                            <div class="highlight-box" style="margin-top: 1rem;">
-                                <p><strong>Incentives:</strong> Compliance with Saudization requirements provides access to various government services and benefits.</p>
-                            </div>
-                        </div>
+                    <div class="block-content">
+                        <p><strong>Physical Infrastructure:</strong> Modern, rapidly developing infrastructure. World-class transportation systems including highways, railways, and airports. Smart city projects like NEOM pushing boundaries of innovation.</p>
+                        <p><strong>Digital Infrastructure:</strong> Extensive digital transformation initiatives. High-speed internet and widespread 5G deployment. Cloud infrastructure and data centers supporting digital economy.</p>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Slide 5: Educational & Infrastructure -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Host-Country: Saudi Arabia</h1>
+        </div>
+        
+        <!-- Slide 3: Legal & Regulatory Framework -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Host Country: Legal & Regulatory Framework</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">⚖️</div>
+                        <div class="block-title">Saudi Labor Laws</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Saudi Arabia's labor laws are evolving to support a modern workforce while maintaining Saudization requirements and considerations based on Islamic law.</p>
+                        <p>These regulations govern employment relationships, working conditions, employee rights, and employer obligations, creating a structured framework for business operations.</p>
+                    </div>
+                </div>
                 
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">🎓</div>
-                            <div>
-                                <h2>Educational & Talent Pool</h2>
-                                <p>The country has invested heavily in education, with numerous Saudi universities and technical institutes. There's a growing emphasis on STEM education and developing a local tech talent pool to support future industries, aligning with national development goals.</p>
-                                <div class="highlight-box" style="margin-top: 1rem;">
-                                    <p><strong>Key Focus:</strong> Strong pipeline of graduates in technology, engineering, and business fields.</p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">⏰</div>
+                        <div class="block-title">Working Hours & Leave Entitlements</div>
                     </div>
-                    
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">🏗️</div>
-                            <div>
-                                <h2>Infrastructure & Connectivity</h2>
-                                <p>Riyadh features modern, rapidly developing infrastructure, including world-class transportation and smart city projects. Extensive digital transformation initiatives are underway, ensuring excellent international connectivity and a favorable environment for technological advancement.</p>
-                                <div class="highlight-box" style="margin-top: 1rem;">
-                                    <p><strong>Highlights:</strong> 5G networks, fiber optic connectivity, and state-of-the-art business districts.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="block-content">
+                        <p><strong>Standard Work Week:</strong> 8 hours per day, 48 hours per week maximum. During Ramadan, reduced to 6 hours per day for Muslim employees. Regulated overtime with mandatory premium pay.</p>
+                        <p><strong>Leave Entitlements:</strong> Annual leave 21-30 days paid. Maternity leave 12 weeks fully paid. Paternity leave 3 days. Marriage leave 5 days. Hajj leave 10 days with conditions.</p>
                     </div>
                 </div>
-
-                <div class="card" style="margin-top: 2rem;">
-                    <h2>🎯 Why Riyadh is Ideal for CaspianTech Global</h2>
-                    <div class="grid-3" style="margin-top: 1.5rem;">
-                        <div class="highlight-box">
-                            <h3>Market Opportunity</h3>
-                            <p>Access to one of the fastest-growing tech markets in the Middle East</p>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>Government Support</h3>
-                            <p>Vision 2030 initiatives actively promoting foreign tech investment</p>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>Talent Availability</h3>
-                            <p>Growing pool of qualified professionals in technology and business</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Continue with remaining slides -->
-        <!-- Cultural Compass Introduction -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>🧭 Cultural Compass: Azerbaijan vs. Saudi Arabia</h1>
                 
-                <div class="card">
-                    <div class="icon-text">
-                        <div class="icon-wrapper">📊</div>
-                        <div>
-                            <h3>Hofstede's Cultural Dimensions Analysis</h3>
-                            <p>Using Hofstede's Cultural Dimensions, we analyze key similarities and differences to anticip anticipate challenges and opportunities in establishing our subsidiary in Saudi Arabia.</p>
-                        </div>
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">📄</div>
+                        <div class="block-title">Contracts & End-of-Service Benefits</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Contract Types:</strong> Defined-term and unlimited-term contracts with specific regulations. Required notice periods for termination by either party. Specific grounds and procedures for contract termination.</p>
+                        <p><strong>End-of-Service Benefits (EOSB):</strong> Mandatory gratuity payment calculated based on length of service and final salary. Half month salary per year for first 5 years, full month per year thereafter.</p>
                     </div>
                 </div>
-
-                <div class="comparison-table">
-                    <div class="comparison-column">
-                        <h3>🇦🇿 Azerbaijan</h3>
-                        <div class="highlight-box">
-                            <p><strong>Cultural Background:</strong> Azerbaijan represents our home base, with its unique blend of Eastern and Western influences, secular governance, and strong business traditions in the Caspian region.</p>
-                        </div>
-                    </div>
-                    <div class="comparison-column">
-                        <h3>🇸🇦 Saudi Arabia</h3>
-                        <div class="highlight-box">
-                            <p><strong>Cultural Background:</strong> Saudi Arabia represents our target market, with deep Islamic traditions, strong tribal and family values, and a rapidly modernizing business environment under Vision 2030.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>📈 Cultural Dimensions We'll Analyze</h2>
-                    <div class="grid-2" style="margin-top: 1.5rem;">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">👔</div>
-                            <div>
-                                <h3>Power Distance</h3>
-                                <p>How societies handle inequality and hierarchical structures</p>
-                            </div>
-                        </div>
-                        <div class="icon-text">
-                            <div class="icon-wrapper">👥</div>
-                            <div>
-                                <h3>Individualism vs. Collectivism</h3>
-                                <p>Degree of interdependence among society members</p>
-                            </div>
-                        </div>
-                        <div class="icon-text">
-                            <div class="icon-wrapper">📋</div>
-                            <div>
-                                <h3>Uncertainty Avoidance</h3>
-                                <p>How societies deal with unknown future events</p>
-                            </div>
-                        </div>
-                        <div class="icon-text">
-                            <div class="icon-wrapper">⏳</div>
-                            <div>
-                                <h3>Long-Term Orientation</h3>
-                                <p>Focus on future rewards versus past and present</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Hofstede Dimensions Detailed -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Hofstede's Cultural Dimensions: Detailed Analysis</h1>
                 
-                <div class="card">
-                    <div class="icon-text">
-                        <div class="icon-wrapper">👔</div>
-                        <div>
-                            <h3>Power Distance</h3>
-                            <div class="comparison-table" style="margin-top: 1rem;">
-                                <div class="comparison-column">
-                                    <h3>Azerbaijan (High - 85)</h3>
-                                    <ul>
-                                        <li>Hierarchical structures</li>
-                                        <li>Respect for authority</li>
-                                        <li>Centralized decision-making</li>
-                                        <li>Often tied to age and position</li>
-                                    </ul>
-                                </div>
-                                <div class="comparison-column">
-                                    <h3>Saudi Arabia (High - 72)</h3>
-                                    <ul>
-                                        <li>Strong hierarchical structures</li>
-                                        <li>Deep respect for elders and leaders</li>
-                                        <li>Authority interwoven with religious, tribal, governmental affiliations</li>
-                                        <li>Centralized decision-making</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                <div class="content-block block-4 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">👥</div>
+                        <div class="block-title">Saudization (Nitaqat Program)</div>
                     </div>
-                </div>
-
-                <div class="card">
-                    <div class="icon-text">
-                        <div class="icon-wrapper">👥</div>
-                        <div>
-                            <h3>Individualism vs. Collectivism</h3>
-                            <div class="comparison-table" style="margin-top: 1rem;">
-                                <div class="comparison-column">
-                                    <h3>Azerbaijan (Low - 28)</h3>
-                                    <ul>
-                                        <li>Strong emphasis on group harmony</li>
-                                        <li>Loyalty to the in-group</li>
-                                        <li>Robust social ties</li>
-                                    </ul>
-                                </div>
-                                <div class="comparison-column">
-                                    <h3>Saudi Arabia (Medium - 48)</h3>
-                                    <ul>
-                                        <li>Moderately collectivist</li>
-                                        <li>Prioritizing family and tribal bonds</li>
-                                        <li>Emphasis on wider Islamic community</li>
-                                        <li>Decisions consider collective good over individual desires</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">📋</div>
-                            <div>
-                                <h3>Uncertainty Avoidance</h3>
-                                <p><strong>Azerbaijan (High - 88):</strong> High preference for rules, clear structures, adherence to established traditions</p>
-                                <p><strong>Saudi Arabia (Medium - 64):</strong> Strong preference for structure and clarity, rooted in Islamic principles, provides stability and predictability</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="icon-text">
-                            <div class="icon-wrapper">⏳</div>
-                            <div>
-                                <h3>Long-Term Orientation</h3>
-                                <p><strong>Azerbaijan (Medium - 59):</strong> Balances appreciation for tradition with planning for the future</p>
-                                <p><strong>Saudi Arabia (Low - 27):</strong> Values tradition and historical continuity while embracing strategic long-term vision (Vision 2030)</p>
-                            </div>
-                        </div>
+                    <div class="block-content">
+                        <p>Government initiative requiring companies to hire a percentage of Saudi nationals in their workforce. The required percentage varies by sector and company size.</p>
+                        <p><strong>Compliance Benefits:</strong> Access to government services, ability to hire foreign workers, participation in government tenders, and various business incentives.</p>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Hofstede Chart -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Hofstede's Cultural Dimensions Chart</h1>
+        </div>
+        
+        <!-- Slide 4: Cultural Compass -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Cultural Compass: Hofstede's Dimensions Analysis</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1">
+                    <div class="block-header">
+                        <div class="block-icon">📊</div>
+                        <div class="block-title">Power Distance</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Azerbaijan (85):</strong> Very high score indicating strong preference for hierarchical structures, respect for authority, and centralized decision-making. Employees expect clear chains of command.</p>
+                        <p><strong>Saudi Arabia (72):</strong> High score reflecting strong hierarchy influenced by religious, tribal, and governmental authority structures. Leaders are expected to make decisions.</p>
+                    </div>
+                </div>
                 
-                <div class="chart-container">
-                    <canvas id="hofstedeChart"></canvas>
-                </div>
-
-                <div class="card">
-                    <h2>💡 Key Implications</h2>
-                    <div class="grid-2" style="margin-top: 1.5rem;">
-                        <div class="highlight-box">
-                            <h3>Hierarchical Respect</h3>
-                            <p>Both cultures require high power distance, where respect for authority and hierarchical decision-making are important. In Saudi Arabia, this is significantly shaped by Islamic business principles and family-oriented values.</p>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>Collectivist Values</h3>
-                            <p>While both are collectivist, Saudi Arabia's emphasis on family and religious community requires understanding strong social networks.</p>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>Structure Preference</h3>
-                            <p>Both cultures value clear structures and rules, though Saudi Arabia's framework is deeply rooted in Islamic principles.</p>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>Success Factors</h3>
-                            <p>Clear communication, patience, and culturally informed management strategies will be necessary for success in the Saudi market.</p>
-                        </div>
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">🤝</div>
+                        <div class="block-title">Individualism vs Collectivism</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Azerbaijan (28):</strong> Low score indicating collectivist society with strong emphasis on group harmony, in-group loyalty, and robust social ties. Family and community are central.</p>
+                        <p><strong>Saudi Arabia (48):</strong> Moderately collectivist, prioritizing family units and Islamic community (Ummah) over individual interests while allowing some individual expression.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Workforce Planning -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>👥 Workforce Planning & Staffing</h1>
                 
-                <div class="process-flow">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Strategic Analysis</h3>
-                        <ul style="text-align: left; font-size: 0.9rem;">
-                            <li>Define Riyadh subsidiary as sales, delivery, client-support hub</li>
-                            <li>Protect CaspianTech's core AI, analytics, cybersecurity IP at HQ</li>
-                            <li>Align with Saudi Vision 2030</li>
-                        </ul>
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">🛡️</div>
+                        <div class="block-title">Uncertainty Avoidance</div>
                     </div>
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Demand Analysis</h3>
-                        <ul style="text-align: left; font-size: 0.9rem;">
-                            <li>Leadership: CEO, CFO, Strategic Leads</li>
-                            <li>Technical: Technical Leads, Project Managers</li>
-                            <li>Local: HR, Legal, Sales Managers</li>
-                        </ul>
+                    <div class="block-content">
+                        <p><strong>Azerbaijan (88):</strong> Very high score showing strong preference for rules, clear structures, and established traditions. Low tolerance for ambiguity and change.</p>
+                        <p><strong>Saudi Arabia (64):</strong> Moderately high score with preference for certainty rooted in Islamic principles providing comprehensive life guidance.</p>
+                        <p><strong>Implication:</strong> Both prefer clear rules and procedures, though Azerbaijan shows stronger resistance to change requiring careful change management.</p>
                     </div>
                 </div>
-
-                <div class="process-flow">
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Supply Analysis</h3>
-                        <ul style="text-align: left; font-size: 0.9rem;">
-                            <li>Internal: PCNs for leadership; TCNs with global expertise</li>
-                            <li>External: Strong Saudi talent for HR, Legal, Sales</li>
-                            <li>Limited local availability of advanced AI & cybersecurity specialists</li>
-                        </ul>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Gap Analysis</h3>
-                        <ul style="text-align: left; font-size: 0.9rem;">
-                            <li>Gap between local tech talent and advanced skill needs</li>
-                            <li>High compliance requirements (Saudization)</li>
-                            <li>Need for fast market entry with low risk</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Staffing Approach -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Hybrid Staffing Approach (EPRG Model)</h1>
                 
-                <div class="card">
-                    <div class="icon-text">
-                        <div class="icon-wrapper">🌐</div>
-                        <div>
-                            <h3>Strategic Staffing Solution</h3>
-                            <p>Combines Ethnocentric (PCNs), Polycentric (HCNs), and Geocentric (TCNs) approaches</p>
-                            <div class="highlight-box" style="margin-top: 1rem;">
-                                <p><strong>Objective:</strong> Ensure HQ alignment, cultural integration, and operational efficiency. Staffing decisions based on strategic fit, not nationality.</p>
-                            </div>
-                        </div>
+                <div class="content-block block-4 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">💡</div>
+                        <div class="block-title">Key Cultural Implications</div>
                     </div>
-                </div>
-
-                <div class="grid-3">
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🇦🇿</div>
-                        <h3>Top Leadership - PCNs</h3>
-                        <p><strong>Roles:</strong> CEO, CFO, Strategic Leads</p>
-                        <ul style="font-size: 0.95rem;">
-                            <li>Ensures alignment with CaspianTech's core values and strategy</li>
-                            <li>Facilitates control and coordination with HQ</li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🌍</div>
-                        <h3>Technical Roles - TCNs</h3>
-                        <p><strong>Roles:</strong> Technical Leads, Project Managers</p>
-                        <ul style="font-size: 0.95rem;">
-                            <li>Sourcing specialized skills from global pools</li>
-                            <li>Bridge technical gaps without cultural bias</li>
-                            <li>Lower cultural adaptation challenges</li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🇸🇦</div>
-                        <h3>Local-Critical - HCNs</h3>
-                        <p><strong>Roles:</strong> HR, Legal, Sales Managers</p>
-                        <ul style="font-size: 0.95rem;">
-                            <li>Deep Saudi labor law knowledge</li>
-                            <li>Strong local market understanding</li>
-                            <li>Essential for compliance and localization</li>
-                        </ul>
+                    <div class="block-content">
+                        <p>Both cultures require high power distance management with clear hierarchies and respect for authority. Islamic principles fundamentally shape Saudi business practices and workplace interactions.</p>
+                        <p>Understanding and navigating social networks (wasta) is essential for business success. Culturally informed management practices are necessary for effective operations.</p>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Recruitment -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Recruitment & Talent Sourcing Channels</h1>
+        </div>
+        
+        <!-- Slide 5: Hofstede Chart -->
+        <div class="slide chart-slide">
+            <div class="slide-header">
+                <h2>Hofstede's Cultural Dimensions Comparison</h2>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="hofstedeChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Slide 6: Workforce Planning -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Workforce Planning Process</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1">
+                    <div class="block-header">
+                        <div class="block-icon">🎯</div>
+                        <div class="block-title">Strategic Analysis</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Define Riyadh subsidiary as sales, service delivery, and client-support hub serving the Saudi market. Protect core intellectual property in AI, analytics, and cybersecurity at headquarters in Azerbaijan.</p>
+                        <p>Align subsidiary operations with Saudi Vision 2030 objectives and local market needs. Determine optimal size and structure for initial operations with scalability planning.</p>
+                    </div>
+                </div>
                 
-                <div class="grid-3">
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🇸🇦</div>
-                        <h3>Local Recruitment</h3>
-                        <p><strong>Saudization Focus</strong></p>
-                        <ul>
-                            <li>Local recruitment firms</li>
-                            <li>Executive search firms</li>
-                            <li>Support Saudi talent access</li>
-                            <li>Ensure regulatory compliance</li>
-                            <li>Meet Nitaqat program requirements</li>
-                        </ul>
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">📦</div>
+                        <div class="block-title">Supply Analysis</div>
                     </div>
-
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">💻</div>
-                        <h3>Global & Digital Channels</h3>
-                        <p><strong>Highly digital, young workforce</strong></p>
-                        <ul>
-                            <li>LinkedIn and professional networks</li>
-                            <li>Local and international job portals</li>
-                            <li>Tech-focused recruitment platforms</li>
-                            <li>University partnerships</li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🤝</div>
-                        <h3>Internal & Referral Sourcing</h3>
-                        <p><strong>Lower risk for first-time operations</strong></p>
-                        <ul>
-                            <li>Employee referrals</li>
-                            <li>Professional recommendations</li>
-                            <li>Internal global talent pools for PCN & TCN roles</li>
-                            <li>Alumni networks</li>
-                        </ul>
+                    <div class="block-content">
+                        <p><strong>Internal Supply:</strong> Parent Country Nationals (PCNs) from Azerbaijan for senior leadership positions. Third Country Nationals (TCNs) with global technology expertise.</p>
+                        <p><strong>External Supply:</strong> Strong pool of Saudi talent for HR, Legal, and Sales functions. Growing but limited local talent in advanced AI and cybersecurity.</p>
                     </div>
                 </div>
-
-                <div class="highlight-box">
-                    <h3>💡 Strategic Advantage</h3>
-                    <p>By leveraging multiple recruitment channels, we ensure access to the best talent across all categories (PCNs, HCNs, TCNs) while maintaining compliance with Saudization requirements.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Selection Criteria -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Selection Criteria for Expatriates in Saudi Arabia</h1>
                 
-                <div class="card">
-                    <h2>🎯 Strategic Focus</h2>
-                    <p>Expatriate selection is critical for CaspianTech's first international subsidiary. Selection goes beyond technical competence.</p>
-                    <div class="highlight-box" style="margin-top: 1rem;">
-                        <p><strong>Objective:</strong> Ensure effective knowledge transfer, support cultural adaptation, and reduce expatriate assignment failure.</p>
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">📈</div>
+                        <div class="block-title">Demand Analysis</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Leadership Level:</strong> CEO, CFO, and Strategic Department Leads. <strong>Technical Level:</strong> Technical Leads, Project Managers, Solution Architects.</p>
+                        <p><strong>Local-Critical Roles:</strong> HR Managers, Legal Compliance Officers, Sales Managers. <strong>Required Skills:</strong> AI deployment, advanced analytics, cybersecurity expertise, local market knowledge and regulatory compliance.</p>
                     </div>
                 </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.5rem;">💼</div>
-                        <h3>Technical Competence</h3>
-                        <p>Proven expertise in their field with demonstrated success</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.5rem;">🌍</div>
-                        <h3>Cross-Cultural Aptitude</h3>
-                        <p>Adaptability, open-mindedness, cultural sensitivity, high emotional intelligence</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.5rem;">☪️</div>
-                        <h3>Islamic Cultural Sensitivity</h3>
-                        <p>Understanding and respect for Islamic customs and traditions</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.5rem;">🤝</div>
-                        <h3>Local Business Practices</h3>
-                        <p>Ability to navigate Saudi business etiquette and relationship-building</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.5rem;">👨‍👩‍👧‍👦</div>
-                        <h3>Family Adaptability</h3>
-                        <p>Spouse/partner and family willingness to relocate and adapt</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.5rem;">🎯</div>
-                        <h3>Motivation & Commitment</h3>
-                        <p>Strong desire for international experience and dedication to company vision</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.5rem;">👨‍💼</div>
-                        <h3>Leadership Potential</h3>
-                        <p>Ability to mentor local teams and build strong cross-cultural relationships</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.5rem;">📋</div>
-                        <h3>Understanding of Saudization</h3>
-                        <p>Awareness and support for local employment regulations</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Admin Requirements -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Personal Readiness & Administrative Requirements</h1>
                 
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">💪</div>
-                        <h2>Personal & Leadership Factors</h2>
-                        <ul>
-                            <li><strong>Strong motivation and commitment</strong> to international assignment</li>
-                            <li><strong>Leadership potential</strong> and ability to mentor local teams</li>
-                            <li><strong>Family adaptability</strong> and willingness to relocate to Middle Eastern culture</li>
-                        </ul>
+                <div class="content-block block-4 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">🔍</div>
+                        <div class="block-title">Gap Analysis</div>
                     </div>
-
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">📄</div>
-                        <h2>HR Administration</h2>
-                        <ul>
-                            <li>Compliance with <strong>MHRSD licensing requirements</strong></li>
-                            <li>Management of <strong>visa, work permits, and GOSI registration</strong></li>
-                            <li><strong>HR setup:</strong> Labor file registration with MHRSD, registration on my.gov.sa platform</li>
-                        </ul>
+                    <div class="block-content">
+                        <p><strong>Identified Gaps:</strong> Significant gap between local talent availability and advanced technical skill requirements. High compliance requirements under Saudization program necessitating local hiring. Need for fast market entry with low operational risk.</p>
+                        <p><strong>Solution:</strong> Hybrid staffing model combining PCNs, TCNs, and HCNs with comprehensive training programs.</p>
                     </div>
-                </div>
-
-                <div class="highlight-box">
-                    <h3>🎯 Comprehensive Approach</h3>
-                    <p>Selecting expatriates based on technical strength, cultural readiness, and institutional compliance, ensuring sustainable international operations in Saudi Arabia.</p>
                 </div>
             </div>
-        </section>
-
-        <!-- Training Design -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>🎓 Cross-Cultural Training Design</h1>
+        </div>
+        
+        <!-- Slide 7: Hybrid Staffing Approach -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Hybrid Staffing Approach - EPRG Model</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">🔄</div>
+                        <div class="block-title">Perlmutter's EPRG Framework</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Ethnocentric (PCNs) + Polycentric (HCNs) + Geocentric (TCNs)</strong></p>
+                        <p>We adopt a sophisticated hybrid approach combining Parent Country Nationals from Azerbaijan, Host Country Nationals from Saudi Arabia, and Third Country Nationals from global markets. This ensures optimal talent deployment while maintaining strategic control and local compliance.</p>
+                    </div>
+                </div>
                 
-                <div class="card">
-                    <h2>Training Objectives</h2>
-                    <ul>
-                        <li>Help expatriates adapt to Saudi culture, work norms, and organizational practices</li>
-                        <li>Help host-country employees understand global business practices</li>
-                        <li>Reduce misunderstandings, improve collaboration, increase productivity in multicultural teams</li>
-                    </ul>
-                </div>
-
-                <div class="process-flow">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Needs Analysis</h3>
-                        <p>Identify cultural and workplace challenges</p>
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">💼</div>
+                        <div class="block-title">Top Leadership - PCNs</div>
                     </div>
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Target Audience</h3>
-                        <p>Tailor training for expatriates and host-country employees</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Relevant Content</h3>
-                        <p>Include cultural norms, communication, business etiquette, legal rules</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Effective Methods</h3>
-                        <p>Workshops, role-plays, mentoring, e-learning</p>
+                    <div class="block-content">
+                        <p><strong>Key Roles:</strong> Chief Executive Officer (CEO), Chief Financial Officer (CFO), Strategic Department Leads.</p>
+                        <p><strong>Rationale:</strong> Deep understanding and alignment with CaspianTech values and strategic vision. Facilitates seamless coordination with headquarters during critical expansion phase. Proven track record with company systems and culture.</p>
                     </div>
                 </div>
-
-                <div class="grid-2">
-                    <div class="highlight-box">
-                        <h3>For Expatriates</h3>
-                        <ul>
-                            <li>Reduce culture shock</li>
-                            <li>Improve workplace adaptation</li>
-                            <li>Facilitate knowledge transfer</li>
-                        </ul>
-                    </div>
-                    <div class="highlight-box">
-                        <h3>For Local Employees</h3>
-                        <ul>
-                            <li>Enhance cross-cultural collaboration</li>
-                            <li>Build global awareness</li>
-                            <li>Enable effective communication with expatriates</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Expat Training -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Training for Expatriate Employees</h1>
                 
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🕌</div>
-                        <h3>Cultural Orientation/Assimilation</h3>
-                        <p>Intensive training on Islamic culture, business etiquette, social norms in Saudi Arabia</p>
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">💻</div>
+                        <div class="block-title">Technical Roles - TCNs</div>
                     </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🗣️</div>
-                        <h3>Language Training</h3>
-                        <p>Arabic language basics (even if English used in business) for daily interactions</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">⚖️</div>
-                        <h3>Legal & Compliance Training</h3>
-                        <p>Understand labor laws, Saudization rules, and company policies</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">💻</div>
-                        <h3>Role-Specific Technical Training</h3>
-                        <p>Gain knowledge about local systems, tools, and processes</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">👨‍💼</div>
-                        <h3>Leadership & Teamwork</h3>
-                        <p>(If managerial) Learn how to manage Saudi teams and motivate employees</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🎓</div>
-                        <h3>Mentoring & Knowledge Transfer</h3>
-                        <p>Share expertise with local employees to develop future talent</p>
+                    <div class="block-content">
+                        <p><strong>Key Roles:</strong> Technical Leads and Architects, Project Managers, Senior Developers and Engineers.</p>
+                        <p><strong>Rationale:</strong> Access to global expertise in AI, analytics, and cybersecurity from Europe and beyond. Bridge technical capability gaps without cultural bias. Bring international best practices and diverse perspectives. Support knowledge transfer to local Saudi team members.</p>
                     </div>
                 </div>
-
-                <div class="card">
-                    <h2>On-Going & Repatriation Support</h2>
-                    <div class="grid-2" style="margin-top: 1rem;">
-                        <div class="highlight-box">
-                            <h3>Ongoing Support</h3>
-                            <ul>
-                                <li><strong>Mentorship:</strong> Pairing with senior leader in HQ and local mentor</li>
-                                <li><strong>Cultural Coaching:</strong> Addressing real-time challenges</li>
-                            </ul>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>Repatriation Planning</h3>
-                            <ul>
-                                <li><strong>Career Planning:</strong> Clear career path upon return</li>
-                                <li><strong>Reverse Culture Shock:</strong> Workshops for re-entry</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- HCN Training -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Training for Host-Country Employees & All Staff</h1>
                 
-                <div class="card">
-                    <h2>🇸🇦 For Saudi Staff</h2>
-                    <div class="grid-2" style="margin-top: 1rem;">
-                        <div class="card">
-                            <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🏢</div>
-                            <h3>CaspianTech Culture</h3>
-                            <p>Understanding global culture while respecting Islamic and Saudi values</p>
-                        </div>
-                        <div class="card">
-                            <div class="icon-wrapper" style="margin-bottom: 0.8rem;">💻</div>
-                            <h3>Technical & Functional Training</h3>
-                            <p>Comprehensive training on software solutions and development methodologies</p>
-                        </div>
-                        <div class="card">
-                            <div class="icon-wrapper" style="margin-bottom: 0.8rem;">👨‍💼</div>
-                            <h3>Leadership Development</h3>
-                            <p>Programs to prepare HCNs for managerial roles aligned with Saudi practices</p>
-                        </div>
-                        <div class="card">
-                            <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🌍</div>
-                            <h3>Cross-Cultural & International Exposure</h3>
-                            <p>Work with international teams or attend global workshops</p>
-                        </div>
-                        <div class="card">
-                            <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🎓</div>
-                            <h3>Mentoring & Coaching</h3>
-                            <p>Learn from expatriates or senior employees</p>
-                        </div>
-                        <div class="card">
-                            <div class="icon-wrapper" style="margin-bottom: 0.8rem;">📈</div>
-                            <h3>Career & Personal Development</h3>
-                            <p>Workshops on goal-setting, feedback, and career planning</p>
-                        </div>
+                <div class="content-block block-4">
+                    <div class="block-header">
+                        <div class="block-icon">🇸🇦</div>
+                        <div class="block-title">Local-Critical Roles - HCNs</div>
                     </div>
-                </div>
-
-                <div class="card">
-                    <h2>👥 All Employees (Joint Initiatives)</h2>
-                    <div class="grid-2" style="margin-top: 1rem;">
-                        <div class="highlight-box">
-                            <p><strong>Team-Building Programs:</strong> Foster trust, collaboration, and mutual understanding</p>
-                        </div>
-                        <div class="highlight-box">
-                            <p><strong>Knowledge-Sharing Forums:</strong> Internal seminars, presentations, cross-departmental projects</p>
-                        </div>
-                        <div class="highlight-box">
-                            <p><strong>E-learning:</strong> Access to online courses, webinars, and certifications</p>
-                        </div>
-                        <div class="highlight-box">
-                            <p><strong>Health & Wellbeing:</strong> Stress management, workplace safety, wellness workshops</p>
-                        </div>
+                    <div class="block-content">
+                        <p><strong>Key Roles:</strong> Human Resources Managers, Legal and Compliance Officers, Sales and Account Managers, Government Relations Specialists.</p>
+                        <p><strong>Rationale:</strong> Deep knowledge of Saudi labor law and regulatory environment. Essential for Saudization compliance and government interactions. Strong local networks and cultural understanding for client relationships.</p>
                     </div>
-                </div>
-
-                <div class="card">
-                    <h2>📊 Evaluation of Training Effectiveness</h2>
-                    <ul>
-                        <li>Pre- and post-training assessments</li>
-                        <li>Behavioral observation by managers</li>
-                        <li>Feedback surveys from trainees and colleagues</li>
-                        <li>Business metrics: reduced conflicts, improved collaboration, employee satisfaction</li>
-                    </ul>
                 </div>
             </div>
-        </section>
-
-        <!-- Performance Management -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>📊 Performance Management System</h1>
+        </div>
+        
+        <!-- Slide 8: Recruitment & Selection -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Recruitment & Selection Strategy</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1">
+                    <div class="block-header">
+                        <div class="block-icon">🏢</div>
+                        <div class="block-title">Local Recruitment Agencies</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Partner with established local recruitment agencies and executive search firms specializing in the Saudi market. These agencies have deep networks and understanding of local talent landscape.</p>
+                        <p>They support accessing qualified Saudi talent while ensuring Saudization compliance. Leverage their understanding of local salary expectations and employment practices. Utilize networks for hard-to-fill specialized positions.</p>
+                    </div>
+                </div>
                 
-                <div class="card">
-                    <h2>⚖️ Hybrid Approach</h2>
-                    <p>Combine CaspianTech's standardized performance metrics (project completion rates, code quality) with locally adapted behavioral competencies integrating Saudi cultural values.</p>
-                </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🎯</div>
-                        <h3>Goal Setting</h3>
-                        <ul>
-                            <li>Ensure goals are <strong>SMART</strong> (Specific, Measurable, Achievable, Relevant, Time-bound)</li>
-                            <li>Involve employees in goal-setting for engagement</li>
-                            <li>Emphasize individual and team contributions aligned with Saudi values</li>
-                        </ul>
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">🌐</div>
+                        <div class="block-title">Global & Digital Channels</div>
                     </div>
-
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">💬</div>
-                        <h3>Continuous Feedback & Coaching</h3>
-                        <ul>
-                            <li>Move beyond annual reviews to ongoing feedback sessions</li>
-                            <li>Train managers in effective coaching techniques</li>
-                            <li>Balance directness with respect and sensitivity for Saudi culture</li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🔄</div>
-                        <h3>360-Degree Feedback & Peer Recognition</h3>
-                        <ul>
-                            <li>Incorporate multi-source feedback adapted to Saudi business culture</li>
-                            <li>Provide holistic view of performance</li>
-                            <li>Implement peer recognition programs</li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">📋</div>
-                        <h3>Performance Appraisal</h3>
-                        <ul>
-                            <li>Conduct formal evaluations annually or semi-annually</li>
-                            <li>Consider both results (KPIs) and behaviors</li>
-                            <li>Use BARS to reduce bias and ensure clarity</li>
-                            <li>For Saudi employees, provide culturally sensitive feedback, avoid public criticism</li>
-                        </ul>
+                    <div class="block-content">
+                        <p>Saudi Arabia has a highly digital, young workforce active on professional platforms. Utilize LinkedIn and regional networking sites for targeted outreach and employer branding.</p>
+                        <p>Post openings on local and international job portals reaching diverse candidate pools. Engage with Saudi tech communities and professional associations. Participate in virtual and in-person career fairs and recruitment events.</p>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="icon-wrapper" style="margin-bottom: 0.8rem;">📈</div>
-                    <h3>Developmental Focus & Growth Plans</h3>
-                    <ul>
-                        <li>Identify strengths, skill gaps, career aspirations</li>
-                        <li>Offer training, mentoring, or international exposure based on appraisal outcomes</li>
-                        <li>Include Saudization development programs for succession planning</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Special Considerations -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Performance Management: Special Considerations</h1>
                 
-                <div class="card">
-                    <h2>🤝 Cultural Sensitivity</h2>
-                    <div class="grid-2" style="margin-top: 1rem;">
-                        <div class="highlight-box">
-                            <p><strong>Respect hierarchy:</strong> Senior managers may prefer formal meetings for feedback</p>
-                        </div>
-                        <div class="highlight-box">
-                            <p><strong>Gender norms:</strong> Ensure evaluations respect local gender policies</p>
-                        </div>
-                        <div class="highlight-box">
-                            <p><strong>Feedback style:</strong> Avoid overly direct criticism; use constructive, positive framing</p>
-                        </div>
-                        <div class="highlight-box">
-                            <p><strong>Team focus:</strong> Balance individual achievements with team contributions</p>
-                        </div>
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">👥</div>
+                        <div class="block-title">Internal & Referral Sourcing</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Lower risk approach particularly valuable for first-time international operations. Establish employee referral programs with meaningful incentives for successful hires. Tap into internal global talent pools for PCN and TCN positions.</p>
+                        <p>Consider internal candidates from Azerbaijan headquarters interested in international assignments. Leverage existing employee networks in target regions and industries.</p>
                     </div>
                 </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🌍</div>
-                        <h3>Expatriate Employees</h3>
-                        <ul>
-                            <li>Include <strong>adaptation and integration metrics</strong></li>
-                            <li>Encourage mentoring of local employees for knowledge transfer</li>
-                            <li>Assess cross-cultural collaboration effectiveness</li>
-                            <li>Monitor family adjustment and assignment success</li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 0.8rem;">🇸🇦</div>
-                        <h3>Host-Country Employees</h3>
-                        <ul>
-                            <li>Support <strong>career development and leadership readiness</strong> per Saudization</li>
-                            <li>Emphasize skills growth and succession potential</li>
-                            <li>Recognize cultural strengths and local market knowledge</li>
-                            <li>Provide pathways to senior positions</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Compensation -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>💰 Reward & Compensation System</h1>
                 
-                <div class="card">
-                    <h2>Compensation & Benefits</h2>
-                    <div class="grid-2" style="margin-top: 1rem;">
-                        <div class="highlight-box">
-                            <h3>Mandatory Contributions</h3>
-                            <p>Social insurance for both employer and employee (national/expat)</p>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>National Health Insurance</h3>
-                            <p>Required for all workers</p>
-                        </div>
+                <div class="content-block block-4 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">⭐</div>
+                        <div class="block-title">Expatriate Selection Excellence</div>
                     </div>
-                </div>
-
-                <div class="card">
-                    <h2>🌍 Expatriate Package</h2>
-                    <div class="grid-2" style="margin-top: 1rem;">
-                        <div class="card">
-                            <h3>💵 Base Salary</h3>
-                            <p>Adjusted for Saudi market to ensure competitive purchasing power</p>
-                        </div>
-                        <div class="card">
-                            <h3>🎁 Foreign Service Premium</h3>
-                            <p>15-25% of base salary for inducement/hardship for Middle East assignment</p>
-                        </div>
-                        <div class="card">
-                            <h3>📊 Cost-of-Living Allowance (COLA)</h3>
-                            <p>To offset significant cost of living differences, if applicable</p>
-                        </div>
-                        <div class="card">
-                            <h3>🏠 Housing & Education</h3>
-                            <p>For family accommodation (often expat compounds) and international schooling</p>
-                        </div>
-                        <div class="card">
-                            <h3>✈️ Relocation & Repatriation</h3>
-                            <p>Comprehensive assistance for moving and returning</p>
-                        </div>
-                        <div class="card">
-                            <h3>🏥 Healthcare & Insurance</h3>
-                            <p>Comprehensive international medical coverage, including medical evacuation</p>
-                        </div>
-                    </div>
-                    <div class="highlight-box" style="margin-top: 1rem;">
-                        <h3>☪️ Islamic Banking Principles</h3>
-                        <p>Consideration of Sharia-compliant financial arrangements where appropriate</p>
+                    <div class="block-content">
+                        <p>Selection for international assignments goes beyond technical competence. Focus on comprehensive evaluation including cultural adaptability, family situation assessment, language capabilities, and motivation for international work.</p>
+                        <p>This holistic approach ensures expatriates can effectively transfer knowledge and adapt successfully to Saudi environment.</p>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- HCN Compensation -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>Reward & Compensation System</h1>
+        </div>
+        
+        <!-- Slide 9: Selection Criteria -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Selection Criteria for Expatriates</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1">
+                    <div class="block-header">
+                        <div class="block-icon">🎓</div>
+                        <div class="block-title">Core Competencies</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Technical Competence:</strong> Proven expertise and successful track record in their specific technical field.</p>
+                        <p><strong>Cross-Cultural Aptitude:</strong> Demonstrated adaptability, emotional intelligence, and cultural sensitivity in diverse environments.</p>
+                        <p><strong>Islamic Cultural Sensitivity:</strong> Understanding of and respect for Islamic customs, business etiquette, and religious considerations.</p>
+                    </div>
+                </div>
                 
-                <div class="card">
-                    <h2>🇸🇦 Host-Country Employee Compensation</h2>
-                    <div class="grid-2" style="margin-top: 1rem;">
-                        <div class="card">
-                            <h3>💵 Competitive Base Salary</h3>
-                            <p>Aligned with local market rates and industry benchmarks in Saudi Arabia</p>
-                        </div>
-                        <div class="card">
-                            <h3>🎯 Performance-Based Bonuses</h3>
-                            <p>Individual and team incentives tied to clear KPIs, aligned with Islamic principles</p>
-                        </div>
-                        <div class="card">
-                            <h3>🎁 Benefits Package</h3>
-                            <p>Health insurance, pension contributions, paid time off, parental leave per Saudi labor law</p>
-                        </div>
-                        <div class="card">
-                            <h3>📚 Professional Development</h3>
-                            <p>Access to training, certifications, career advancement opportunities</p>
-                        </div>
-                        <div class="card">
-                            <h3>📈 Equity Options</h3>
-                            <p>Potential for stock options to foster ownership and align interests with company success</p>
-                        </div>
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">🤝</div>
+                        <div class="block-title">Business Integration Skills</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Local Business Practices:</strong> Ability to learn and adapt to Saudi business etiquette and relationship-building approaches.</p>
+                        <p><strong>Family Adaptability:</strong> Family support for relocation with spouse and children's adjustment potential assessed.</p>
+                        <p><strong>Leadership Potential:</strong> Ability to lead diverse teams effectively and mentor local employees for knowledge transfer.</p>
                     </div>
                 </div>
-
-                <div class="card">
-                    <h2>🌟 Non-Monetary Rewards</h2>
-                    <div class="grid-3" style="margin-top: 1rem;">
-                        <div class="highlight-box">
-                            <h3>🏆 Recognition Programs</h3>
-                            <p>Employee of the month, certificates, public appreciation (culturally appropriate)</p>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>📈 Career Development</h3>
-                            <p>Training programs, international exposure, mentoring opportunities</p>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>⚖️ Work-Life Balance</h3>
-                            <p>Flexible leave, wellness programs, family-friendly policies</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>🎯 Long-Term Incentives</h2>
-                    <div class="grid-2" style="margin-top: 1rem;">
-                        <div class="highlight-box">
-                            <h3>Expatriates</h3>
-                            <p>Stock options or long-term performance-based incentives for senior roles</p>
-                        </div>
-                        <div class="highlight-box">
-                            <h3>Host-Country Employees</h3>
-                            <p>Career progression pathways, leadership programs, succession planning aligned with Saudization goals</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="highlight-box">
-                    <h3>⚖️ Compliance Commitment</h3>
-                    <p><strong>All compensation structures will be designed to comply with Saudi labor regulations and cultural norms.</strong></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Conclusion -->
-        <section class="slide">
-            <div class="slide-content">
-                <h1>🚀 Conclusion & Next Steps: Building a Global Future</h1>
                 
-                <div class="card">
-                    <h2>🎯 Our Strategic Foundation</h2>
-                    <p>This comprehensive IHRM strategy lays the foundation for CaspianTech Global's successful entry into the Saudi market. By strategically integrating our corporate culture with local expertise, we are poised for sustainable growth and a thriving international presence.</p>
-                </div>
-
-                <div class="grid-3">
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🌍</div>
-                        <h3>Cultural Integration</h3>
-                        <p>Deep understanding of Saudi culture combined with CaspianTech values</p>
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">👤</div>
+                        <div class="block-title">Personal Readiness Factors</div>
                     </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">👥</div>
-                        <h3>Talent Strategy</h3>
-                        <p>Hybrid staffing approach leveraging PCNs, HCNs, and TCNs</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">⚖️</div>
-                        <h3>Compliance Excellence</h3>
-                        <p>Full adherence to Saudi labor laws and Saudization requirements</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">🎓</div>
-                        <h3>Comprehensive Training</h3>
-                        <p>Robust pre-departure, ongoing, and repatriation programs</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">📊</div>
-                        <h3>Performance Management</h3>
-                        <p>Culturally sensitive evaluation and development systems</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">💰</div>
-                        <h3>Competitive Compensation</h3>
-                        <p>Market-aligned packages for expatriates and local talent</p>
+                    <div class="block-content">
+                        <p>Strong motivation and genuine commitment to international assignment success. Leadership potential with proven ability to mentor and develop others. Family adaptability and willingness to relocate to Saudi Arabia.</p>
+                        <p>Strong stress management capabilities and psychological resilience. Health and physical fitness suitable for Saudi climate and lifestyle. Previous international experience or demonstrated cultural flexibility highly valued.</p>
                     </div>
                 </div>
-
-                <div class="card">
-                    <h2>🎯 Next Steps</h2>
-                    <div class="process-flow">
-                        <div class="process-step">
-                            <div class="step-number">1</div>
-                            <h3>Finalize Recruitment</h3>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">2</div>
-                            <h3>Begin Training</h3>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">3</div>
-                            <h3>Establish Operations</h3>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">4</div>
-                            <h3>Launch Subsidiary</h3>
-                        </div>
+                
+                <div class="content-block block-4 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">📄</div>
+                        <div class="block-title">HR Administration Requirements</div>
                     </div>
-                </div>
-
-                <div class="highlight-box">
-                    <h3>💡 Our Commitment to Success</h3>
-                    <p>With careful planning, cultural sensitivity, strategic staffing, comprehensive training, fair performance management, and competitive compensation, CaspianTech Global is ready to establish a strong, sustainable presence in Saudi Arabia and beyond.</p>
-                </div>
-
-                <div class="card" style="text-align: center; margin-top: 2rem;">
-                    <h2 style="background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; justify-content: center;">Thank You</h2>
-                    <p style="font-size: 1.2rem; margin-top: 1rem;"><strong>Team A:</strong> Iram Iqbal, Lala Eyvazova, Elnura Alakbarova, Aytan Rzayeva, Javanshir Hamidzada, Nizami Tahirov</p>
+                    <div class="block-content">
+                        <p><strong>MHRSD Licensing:</strong> Obtain establishment license from Ministry of Human Resources and Social Development ensuring full compliance.</p>
+                        <p><strong>Work Authorization:</strong> Process visa applications, work permits, and iqama (residence permits). <strong>GOSI Registration:</strong> Enroll employees in General Organization for Social Insurance. Register on digital platforms including my.gov.sa.</p>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
-    
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <!-- Slide 10: Cross-Cultural Training -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Cross-Cultural Training & Development</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">🎯</div>
+                        <div class="block-title">Training Objectives</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Help expatriates successfully adapt to Saudi culture and business practices while maintaining effectiveness. Help local employees understand global business standards and CaspianTech's corporate culture.</p>
+                        <p>Reduce culture shock and accelerate adaptation period. Improve cross-cultural collaboration and team productivity through shared understanding and mutual respect.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">✈️</div>
+                        <div class="block-title">Assignment Life-Cycle Support</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Pre-Departure Phase:</strong> Research and cultural orientation. Language basics and practical logistics preparation.</p>
+                        <p><strong>In-Country Support:</strong> Ongoing coaching and mentoring. Real-time problem solving and career development opportunities.</p>
+                        <p><strong>Repatriation Planning:</strong> Re-entry preparation and reverse culture shock management. Career planning and knowledge sharing with organization.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">🌍</div>
+                        <div class="block-title">Expatriate Training Programs</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Cultural Orientation:</strong> Deep dive into Islamic culture, traditions, and values. Saudi business etiquette and social norms. Gender considerations and appropriate workplace behavior.</p>
+                        <p><strong>Language & Legal:</strong> Arabic language basics for daily interactions. Saudi labor laws and Saudization requirements. <strong>Technical & Leadership:</strong> Local systems and processes. Managing Saudi teams effectively. Mentoring and knowledge transfer skills.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-4">
+                    <div class="block-header">
+                        <div class="block-icon">🇸🇦</div>
+                        <div class="block-title">Host-Country National Training</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>CaspianTech Culture:</strong> Understanding our global culture, values, and ways of working while respecting Islamic principles.</p>
+                        <p><strong>Technical Training:</strong> Deep training on our software solutions, methodologies, and best practices. <strong>Professional Development:</strong> Leadership development programs. Cross-cultural exposure opportunities. Mentoring relationships. Career planning and advancement pathways.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 11: On-Going Development -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>On-Going Development & Support</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1">
+                    <div class="block-header">
+                        <div class="block-icon">🔄</div>
+                        <div class="block-title">Expatriate Support Systems</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Dual Mentorship:</strong> Assign both a senior leader at headquarters and a local Saudi mentor for comprehensive guidance and support.</p>
+                        <p><strong>Ongoing Coaching:</strong> Regular check-ins addressing real-time cultural challenges and adjustment issues. <strong>Career Planning:</strong> Clear career path and repatriation opportunities. <strong>Re-entry Support:</strong> Reverse culture shock management workshops and integration planning.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">🇸🇦</div>
+                        <div class="block-title">Host-Country Development</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Corporate Culture:</strong> Ongoing socialization into CaspianTech's values and ways of working. <strong>Advanced Technical:</strong> Continuous skill development in software technologies and methodologies.</p>
+                        <p><strong>Leadership & Career:</strong> Leadership development programs preparing high-potential Saudis for managerial roles. Cross-cultural exposure through projects and exchanges. Mentoring relationships. Individual goal-setting and succession planning.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">👥</div>
+                        <div class="block-title">Joint Development Initiatives</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Team-Building:</strong> Regular team-building events fostering trust, collaboration, and cultural understanding across all employee groups.</p>
+                        <p><strong>Knowledge-Sharing:</strong> Internal seminars and presentations. Lunch-and-learns on technical and cultural topics. Cross-departmental projects promoting collaboration. <strong>E-Learning & Wellness:</strong> Online courses, webinars, certifications. Stress management and workplace safety. Wellness initiatives. Innovation challenges with cross-functional teams.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-4 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">📊</div>
+                        <div class="block-title">Training Evaluation</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Pre/Post Assessments:</strong> Testing cultural knowledge and communication skills before and after training programs.</p>
+                        <p><strong>Behavioral Observation:</strong> Managers observe and assess adaptation in meetings and daily work. <strong>Feedback & Metrics:</strong> Regular surveys and interviews. Business performance metrics. 360-degree feedback reviews.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 12: Performance Management -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Performance Management System</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">🔄</div>
+                        <div class="block-title">Hybrid Performance Approach</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Combining CaspianTech's standardized global performance metrics with locally adapted behavioral competencies that integrate Saudi cultural values and Islamic principles.</p>
+                        <p>This ensures consistency across the organization while respecting and leveraging local context through goal setting, continuous feedback, formal appraisals, and developmental focus.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">🎯</div>
+                        <div class="block-title">SMART Goals & Feedback</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>SMART Goals:</strong> Specific, Measurable, Achievable, Relevant, Time-bound objectives. Collaborative goal-setting involving employee input and buy-in. Emphasis on both individual achievements and team contributions reflecting collectivist values.</p>
+                        <p><strong>Continuous Feedback:</strong> Move beyond annual reviews to ongoing feedback sessions. Train managers in culturally appropriate feedback delivery. Implement 360-degree feedback adapted to Saudi cultural norms.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">📋</div>
+                        <div class="block-title">Formal Appraisal Process</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Conduct formal performance evaluations annually or semi-annually with structured, documented process. Consider both results (achievement of KPIs) and behaviors (how work is accomplished).</p>
+                        <p>Use Behaviorally Anchored Rating Scales (BARS) to reduce bias and increase objectivity. For Saudi employees: Deliver feedback with cultural sensitivity, avoiding public criticism or confrontation. Document discussions thoroughly and create clear development plans with mutual agreement.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-4">
+                    <div class="block-header">
+                        <div class="block-icon">📈</div>
+                        <div class="block-title">Development Focus</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Identify individual strengths, skill gaps, and career aspirations through structured dialogue. Offer targeted training programs, mentoring opportunities, and international exposure.</p>
+                        <p>Include Saudization-focused development preparing local employees for leadership positions. Create individualized development plans with clear milestones and timelines. Link performance management to succession planning and talent pipeline development.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 13: Compensation System -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Compensation & Benefits Structure</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">✅</div>
+                        <div class="block-title">Mandatory Compliance</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Social Insurance (GOSI):</strong> Mandatory contributions from both employer and employee covering retirement benefits, disability insurance, and death benefits.</p>
+                        <p><strong>National Health Insurance:</strong> Required coverage for all workers providing comprehensive medical care. These form the non-negotiable foundation of our compensation framework ensuring full legal compliance.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">✈️</div>
+                        <div class="block-title">Expatriate Compensation Package</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Base Salary:</strong> Competitive compensation adjusted for Saudi market realities. <strong>Foreign Service Premium:</strong> 15-25% of base salary as inducement for international assignment. <strong>Cost-of-Living Allowance:</strong> Offset differences in living costs between home and host country.</p>
+                        <p><strong>Housing & Education:</strong> Family accommodation or generous housing stipend. International school fees coverage for children. <strong>Additional Benefits:</strong> Comprehensive relocation assistance. Annual home leave flights for family. International healthcare coverage.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">🇸🇦</div>
+                        <div class="block-title">Host-Country National Compensation</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Competitive Base Salary:</strong> Aligned with local Saudi market rates for comparable positions and experience levels.</p>
+                        <p><strong>Performance-Based Bonuses:</strong> Individual and team incentives tied to achievement of key performance indicators. <strong>Comprehensive Benefits:</strong> Health insurance, pension contributions, generous paid time off, parental leave. <strong>Professional Development:</strong> Training programs, certifications, clear career advancement pathways. <strong>End-of-Service Benefits:</strong> Mandatory gratuity based on tenure as required by law.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-4">
+                    <div class="block-header">
+                        <div class="block-icon">🏆</div>
+                        <div class="block-title">Non-Monetary Rewards</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Recognition Programs:</strong> Employee of the month awards. Achievement certificates and public appreciation. Performance-based recognition visible to peers.</p>
+                        <p><strong>Career Development:</strong> Training and development programs. International exposure opportunities. Mentoring and coaching. <strong>Work-Life Balance:</strong> Flexible leave policies. Wellness programs and initiatives. Family-friendly workplace policies. <strong>Long-Term Incentives:</strong> Stock options for key employees. Retention bonuses. Profit-sharing programs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 14: Conclusion -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Conclusion: Path to Success</h2>
+            </div>
+            <div class="content-grid">
+                <div class="content-block block-1 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">🌍</div>
+                        <div class="block-title">Strategic Foundation</div>
+                    </div>
+                    <div class="block-content">
+                        <p>This comprehensive International Human Resource Management strategy provides a robust foundation for CaspianTech Global's successful entry into the Saudi Arabian market.</p>
+                        <p>It addresses all critical aspects from initial workforce planning through performance management and compensation structures, ensuring we are well-prepared for this strategic expansion.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-2">
+                    <div class="block-header">
+                        <div class="block-icon">✅</div>
+                        <div class="block-title">Key Success Factors</div>
+                    </div>
+                    <div class="block-content">
+                        <p>Strategic integration of our corporate culture with local expertise and cultural sensitivity. Sophisticated hybrid staffing model balancing global talent with local requirements and compliance.</p>
+                        <p>Comprehensive cross-cultural training supporting both expatriates and local employees. Culturally-adapted performance management systems. Competitive and legally compliant compensation structures attracting and retaining top talent.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-3">
+                    <div class="block-header">
+                        <div class="block-icon">🚀</div>
+                        <div class="block-title">Our Path Forward</div>
+                    </div>
+                    <div class="block-content">
+                        <p><strong>Sustainable Growth:</strong> Positioned for long-term success in Saudi market with scalable operations and strong foundations.</p>
+                        <p><strong>Regional Leadership:</strong> Building a replicable model for future expansions across GCC and MENA regions. <strong>Cultural Excellence:</strong> Respecting and integrating local values while maintaining global standards. <strong>Talent Development:</strong> Investing in both expatriate and local employees for mutual growth and knowledge transfer.</p>
+                    </div>
+                </div>
+                
+                <div class="content-block block-4 highlight-block">
+                    <div class="block-header">
+                        <div class="block-icon">❤️</div>
+                        <div class="block-title">Our Commitment</div>
+                    </div>
+                    <div class="block-content">
+                        <p>By strategically integrating our corporate culture with local expertise, implementing best-in-class IHRM practices, and maintaining unwavering commitment to both business excellence and cultural sensitivity, CaspianTech Global is positioned for sustainable growth and a thriving international presence.</p>
+                        <p>This Riyadh subsidiary will serve as our gateway to the broader Middle East market.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 15: Thank You -->
+        <div class="slide hero">
+            <h1>Thank You</h1>
+            <p class="subtitle">Questions & Discussion</p>
+            <div class="team">
+                <strong>Team A:</strong> Iram Iqbal, Lala Eyvazova, Elnura Alakbarova, Aytan Rzayeva, Javanshir Hamidzada, Nizami Tahirov
+            </div>
+        </div>
+        
+        <a href="https://youtu.be/rpNSmOfCI4w?si=VL25oAJbvEZmpQH6" target="_blank" class="video-link">
+            <ion-icon name="logo-youtube"></ion-icon>
+            Watch Video
+        </a>
+        
+        <footer>
+            <button class="nav-btn" onclick="prevSlide()">
+                <ion-icon name="arrow-back"></ion-icon>
+                Previous
+            </button>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <button class="nav-btn" onclick="nextSlide()">
+                Next
+                <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+        </footer>
     </div>
     
     <script>
-        // Particles.js Configuration
         particlesJS('particles-js', {
             particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#667eea' },
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: '#00F5D4' },
                 shape: { type: 'circle' },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#667eea',
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'repulse' },
-                    onclick: { enable: true, mode: 'push' },
-                    resize: true
-                }
-            },
-            retina_detect: true
+                opacity: { value: 0.3, random: true },
+                size: { value: 2.7, random: true },
+                line_linked: { enable: true, distance: 140, color: '#00F5D4', opacity: 0.22, width: 0.85 },
+                move: { enable: true, speed: 1.6 }
+            }
         });
         
-        // Hofstede Chart
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        
+        function updateSlide() {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[currentSlide].classList.add('active');
+            progressBar.style.width = ((currentSlide + 1) / slides.length * 100) + '%';
+            gsap.fromTo(slides[currentSlide].querySelectorAll('.content-block, .hero h1, .hero .subtitle, .hero .team, .slide-header'),
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.45, stagger: 0.05, ease: 'power3.out' }
+            );
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlide();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlide();
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+        });
+        
         const ctx = document.getElementById('hofstedeChart');
         if (ctx) {
             new Chart(ctx, {
-                type: 'bar',
+                type: 'radar',
                 data: {
-                    labels: ['Power Distance', 'Individualism', 'Motivation towards Achievement', 'Uncertainty Avoidance', 'Long Term Orientation', 'Indulgence'],
+                    labels: ['Power Distance', 'Individualism', 'Motivation', 'Uncertainty Avoidance', 'Long Term', 'Indulgence'],
                     datasets: [{
                         label: 'Azerbaijan',
-                        data: [85, 28, 50, 88, 59, 22],
-                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 2,
-                        borderRadius: 8
+                        data: [85, 28, 50, 88, 59, 27],
+                        backgroundColor: 'rgba(0, 245, 212, 0.2)',
+                        borderColor: '#00F5D4',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#00F5D4',
+                        pointRadius: 5
                     }, {
                         label: 'Saudi Arabia',
                         data: [72, 48, 43, 64, 27, 14],
-                        backgroundColor: 'rgba(102, 126, 234, 0.7)',
-                        borderColor: 'rgba(102, 126, 234, 1)',
-                        borderWidth: 2,
-                        borderRadius: 8
+                        backgroundColor: 'rgba(254, 95, 85, 0.2)',
+                        borderColor: '#FE5F55',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#FE5F55',
+                        pointRadius: 5
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { 
-                            display: true,
-                            labels: {
-                                color: '#f8f9fa',
-                                font: { size: 14, weight: 'bold' }
-                            }
-                        },
-                        title: {
-                            display: true,
-                            text: 'Hofstede Cultural Dimensions: Azerbaijan vs Saudi Arabia',
-                            color: '#f8f9fa',
-                            font: { size: 18, weight: 'bold' }
-                        }
-                    },
                     scales: {
-                        y: {
+                        r: {
                             beginAtZero: true,
                             max: 100,
-                            grid: { color: 'rgba(102, 126, 234, 0.1)' },
-                            ticks: { color: '#adb5bd' }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#adb5bd', font: { size: 11 } }
+                            ticks: { color: '#94A3B8', font: { size: 12 } },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: { color: '#F8FAFC', font: { size: 13, weight: 'bold' } }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { color: '#F8FAFC', font: { size: 14, weight: 'bold' }, padding: 18 }
                         }
                     }
                 }
             });
         }
         
-        // Slides Navigation
-        const slides = document.querySelectorAll('.slide');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const progressBar = document.getElementById('progressBar');
-        let currentSlide = 0;
-        
-        function showSlide(index) {
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-                slide.style.opacity = 0;
-                slide.style.visibility = "hidden";
-            });
-
-            navLinks.forEach(link => link.classList.remove('active'));
-
-            slides[index].classList.add('active');
-            slides[index].style.opacity = 1;
-            slides[index].style.visibility = "visible";
-
-            navLinks[index]?.classList.add('active');
-
-            const progress = ((index + 1) / slides.length) * 100;
-            progressBar.style.width = progress + '%';
-
-            const targets = slides[index].querySelectorAll('.card, h1, h2, h3, p, table, canvas, .highlight-box, .process-step, .stat-card');
-            
-            gsap.fromTo(targets,
-                {opacity: 0, y: 20},
-                {opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out'}
-            );
-
-            currentSlide = index;
-        }
-        
-        function nextSlide() {
-            const next = (currentSlide + 1) % slides.length;
-            showSlide(next);
-        }
-        
-        function prevSlide() {
-            const prev = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(prev);
-        }
-        
-        navLinks.forEach((link, index) => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                showSlide(index);
-            });
-        });
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                e.preventDefault();
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                prevSlide();
+        async function exportToPDF() {
+            const button = document.querySelector('.export-btn');
+            button.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon> Exporting...';
+            button.disabled = true;
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('landscape', 'mm', 'a4');
+            for (let i = 0; i < slides.length; i++) {
+                currentSlide = i;
+                slides[i].classList.add('active');
+                await new Promise(resolve => setTimeout(resolve, 150));
+                const canvas = await html2canvas(slides[i], { scale: 2, useCORS: true, logging: false, backgroundColor: '#0A0E27' });
+                const imgData = canvas.toDataURL('image/jpeg', 0.9);
+                if (i > 0) pdf.addPage();
+                pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210);
+                slides[i].classList.remove('active');
             }
-        });
+            slides[currentSlide].classList.add('active');
+            pdf.save('CaspianTech_IHRM_Complete.pdf');
+            button.innerHTML = '<ion-icon name="download-outline"></ion-icon> Export PDF';
+            button.disabled = false;
+        }
         
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('change', () => {
-            document.body.classList.toggle('light-mode');
-            document.body.classList.toggle('dark-mode');
-            
-            const isLight = document.body.classList.contains('light-mode');
-            const chartInstance = Chart.getChart("hofstedeChart");
-            if (chartInstance) {
-                const textColor = isLight ? '#212529' : '#f8f9fa';
-                const gridColor = isLight ? 'rgba(0,0,0,0.1)' : 'rgba(102, 126, 234, 0.1)';
-                
-                chartInstance.options.plugins.title.color = textColor;
-                chartInstance.options.plugins.legend.labels.color = textColor;
-                chartInstance.options.scales.y.ticks.color = textColor;
-                chartInstance.options.scales.x.ticks.color = textColor;
-                chartInstance.options.scales.y.grid.color = gridColor;
-                chartInstance.update();
-            }
-        });
-        
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.querySelector('.loading').classList.add('hide');
-            }, 1000);
-        });
-        
-        showSlide(0);
-        
-        document.querySelectorAll('.card, .highlight-box').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
-                
-                gsap.to(card, {
-                    rotateX: rotateX,
-                    rotateY: rotateY,
-                    duration: 0.3,
-                    ease: 'power2.out',
-                    transformPerspective: 1000
-                });
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    rotateX: 0,
-                    rotateY: 0,
-                    duration: 0.5,
-                    ease: 'power2.out'
-                });
-            });
-        });
+        updateSlide();
     </script>
 </body>
 </html>
